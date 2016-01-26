@@ -1,7 +1,3 @@
-// Uncomment this to see the example spec test pass. Delete if you don't need it!
-// var helloWorld = function(){
-//   return false;
-// };
 var globals = {liIds:0};
 
 function Ticket(movieName, time, senior, firstRun) {
@@ -21,7 +17,9 @@ Ticket.prototype.price = function(){
   }
   this.time = this.time.replace(/:/g,"");
   this.time = parseInt(this.time);
-  if (this.time < 1200){
+  if (this.time === 0) {
+    price +=2;
+  } else if (this.time < 1200){
     price += -2;
   } else if (this.time > 1159 && this.time < 1700){
     price += -1;
@@ -49,18 +47,11 @@ $(document).ready(function() {
     $(".movie-names").append("<option value='"+movie+"'>" + movie + "</option>");
   });
 
-
-
   $('#time').timepicker({
     'minTime': '8:00am',
     'maxTime': '12:00am',
     'timeFormat': "H:i",
     'step': 60
-  });
-
-  $("#newAddress").click(function(){
-    $("#addresses").append("<div class='contactAddress'><div class='form-group'><label for='new-street-address'>Street Address</label><input type='text' class='form-control' id='new-street-address'></div><div class='form-group'><label for='new-city'>City</label><input type='text' class='form-control' id='new-city'></div><div class='form-group'><label for='new-state'>State</label><input type='text' class='form-control' id='new-state'></div>");
-    $(".contactAddress").last().hide().fadeIn(500);
   });
 
   $("form#new-ticket").submit(function(event) {
@@ -70,28 +61,8 @@ $(document).ready(function() {
     var inputtedTime = $("input#time").val();
     var inputtedSenior = $("input#senior").prop("checked");
     var newTicket = new Ticket(inputtedMovieName, inputtedTime, inputtedSenior, testIsFirstRun);
-    console.log(newTicket);
 
-    // $("#hover"+globals.liIds).hover( function(){
-    //   console.log("test");
-    //   $(this).append($("<span> ***</span>"));
-    // }, function (){
-    //   $(this).find("span:last").remove();
-    // });
+    $("#ticket-price").text(newTicket.price());
 
-    clearInput();
-
-      $("ul#addresses").text("");
-
-     });
-    $('.contactAddress').not($(".contactAddress")[0]).remove();
   });
-
-
-function clearInput() {
-  $("input#new-first-name").val("");
-  $("input#new-last-name").val("");
-  $("input#new-street-address").val("");
-  $("input#new-city").val("");
-  $("input#new-state").val("");
-}
+});
