@@ -4,27 +4,13 @@
 // };
 
 
-function Contact(firstName, lastName, street, city, state) {
-  this.firstName = firstName;
-  this.lastName = lastName;
-  this.address = [];
+function Ticket(movieName, time, senior, firstRun) {
+  this.movieName = movieName;
+  this.time = time;
+  this.senior = senior;
+  this.firstRun = firstRun;
 }
 
-function Address(street, city, state) {
-  this.street = street;
-  this.city = city;
-  this.state = state;
-}
-
-Contact.prototype.fullName = function() {
-  return this.firstName + " " + this.lastName;
-}
-
-Address.prototype.fullAddress = function() {
-  return this.street + " " + this.city + " " + this.state;
-}
-
-var globals = {liIds:0};
 
 $(document).ready(function() {
   $('#time').timepicker({

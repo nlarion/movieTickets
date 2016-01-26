@@ -5,27 +5,13 @@
 //   });
 // });
 
-describe('Contact', function(){
+describe('Ticket', function(){
   it("creates new contact with given properties", function(){
-  var testContact = new Contact("James","Beard");
-  expect(testContact.firstName).to.equal("James");
-  expect(testContact.lastName).to.equal("Beard");
-  });
+  var newTicket = new Ticket("Star Wars","12:00",true, true);
+  expect(newTicket.movieName).to.equal("Star Wars");
+  expect(newTicket.time).to.equal("12:00");
+  expect(newTicket.senior).to.equal(true);
+  expect(newTicket.firstRun).to.equal(true);
 
-  it("adds the fullName method to all contacts", function() {
-    var testContact = new Contact("Martha","Stewart");
-    expect(testContact.fullName()).to.equal("Martha Stewart");
   });
-});
-describe('Address', function(){
-  it("creates new address with given properties", function(){
-  var testAddress = new Address("123 St","Portland","Oregon");
-  expect(testAddress.street).to.equal("123 St");
-  expect(testAddress.city).to.equal("Portland");
-  expect(testAddress.state).to.equal("Oregon");
-  });
-  // it("adds fullAddress method to all addresses", function(){
-  //   var testAddress = new Address("123 Main St, Portland, Oregon");
-  //   expect(testAddress.fullAddress()).to.equal("123 Main St, Portland, Oregon");
-  // });
 });
