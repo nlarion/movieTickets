@@ -11,6 +11,26 @@ function Ticket(movieName, time, senior, firstRun) {
   this.firstRun = firstRun;
 }
 
+Ticket.prototype.price = function(){
+  var price = 10;
+  if (this.senior === true) {
+    price += -2;
+  }
+  if (this.firstRun === true) {
+    price += 3;
+  }
+  this.time = this.time.replace(/:/g,"");
+  this.time = parseInt(this.time);
+  if (this.time < 1200){
+    price += -2;
+  } else if (this.time > 1159 && this.time < 1700){
+    price += -1;
+  } else {
+    price +=2;
+  }
+  return price;
+}
+
 
 $(document).ready(function() {
   $('#time').timepicker({
@@ -18,7 +38,7 @@ $(document).ready(function() {
     'maxTime': '12:00am',
     'timeFormat': "H:i",
     'step': 60
-});
+  });
 
   $("#newAddress").click(function(){
     $("#addresses").append("<div class='contactAddress'><div class='form-group'><label for='new-street-address'>Street Address</label><input type='text' class='form-control' id='new-street-address'></div><div class='form-group'><label for='new-city'>City</label><input type='text' class='form-control' id='new-city'></div><div class='form-group'><label for='new-state'>State</label><input type='text' class='form-control' id='new-state'></div>");
