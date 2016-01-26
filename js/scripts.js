@@ -31,11 +31,11 @@ Ticket.prototype.price = function(){
   return price;
 }
 
-function isFirstRun (ticket) {
+function isFirstRun (movieName) {
   var firstRunMovies = ["Star Wars", "The Revenant", "The Hateful Eight","Kung Fu Panda 3"];
   var ret = false;
   firstRunMovies.forEach(function(movie){
-    if(movie.toString()===ticket.movieName.toString()){
+    if(movie===movieName){
       ret = true
     }
   });
@@ -43,11 +43,10 @@ function isFirstRun (ticket) {
 }
 
 $(document).ready(function() {
-  var movies = ["Star Wars", "The Revenant", "The Hateful Eight","Kung Fu Panda 3"];
+  var movies = ["Star Wars", "The Revenant", "The Hateful Eight","Kung Fu Panda 3", "The Martian", "Steve Jobs", "Chi-Raq", "Creed", "The Hunger"];
 
   movies.forEach(function(movie){
-    globals.liIds++ // increment the id
-    $(".movie-names").append("<option><span class='contact' id='movie"+globals.liIds+"'>" + movie + "</span></option>");
+    $(".movie-names").append("<option value='"+movie+"'>" + movie + "</option>");
   });
 
 
@@ -64,20 +63,14 @@ $(document).ready(function() {
     $(".contactAddress").last().hide().fadeIn(500);
   });
 
-  $("form#new-contact").submit(function(event) {
+  $("form#new-ticket").submit(function(event) {
     event.preventDefault();
-    var inputtedFirstName = $("input#new-first-name").val();
-    var inputtedLastName = $("input#new-last-name").val();
-    var newContact = new Contact(inputtedFirstName, inputtedLastName);
-
-    $(".contactAddress").each(function(){
-      var inputtedStreetAddress = $(this).find("input#new-street-address").val();
-      var inputtedCity = $(this).find("input#new-state").val();
-      var inputtedState = $(this).find("input#new-city").val();
-      var newAddress = new Address(inputtedStreetAddress, inputtedCity, inputtedState);
-      newContact.address.push(newAddress);
-      console.log(newAddress);
-    });
+    var inputtedMovieName = $("select#movie-names").val();
+    var testIsFirstRun = isFirstRun(inputtedMovieName);
+    var inputtedTime = $("input#time").val();
+    var inputtedSenior = $("input#senior").prop("checked");
+    var newTicket = new Ticket(inputtedMovieName, inputtedTime, inputtedSenior, testIsFirstRun);
+    console.log(newTicket);
 
     // $("#hover"+globals.liIds).hover( function(){
     //   console.log("test");
@@ -88,19 +81,11 @@ $(document).ready(function() {
 
     clearInput();
 
-    $(".contact").last().click(function() {
-      $("#show-contact").show();
-      $("#show-contact h2").text(newContact.fullName());
-      $(".first-name").text(newContact.firstName);
-      $(".last-name").text(newContact.lastName);
       $("ul#addresses").text("");
-      newContact.address.forEach(function(address){
-        $("ul#addresses").append("<li>" + address.fullAddress() + "</li>");
-      });
-    });
+
+     });
     $('.contactAddress').not($(".contactAddress")[0]).remove();
   });
-});
 
 
 function clearInput() {

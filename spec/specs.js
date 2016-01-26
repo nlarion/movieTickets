@@ -22,7 +22,6 @@ describe('Price', function(){
 });
 describe('isFirstRun', function(){
   it("determines if movie is first run", function(){
-  var newTicket = new Ticket("Star Wars","12:00",true, true);
-  expect(isFirstRun(newTicket)).to.equal(true);
+  expect(isFirstRun("Star Wars")).to.equal(true);
   });
 });
