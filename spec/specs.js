@@ -20,3 +20,9 @@ describe('Price', function(){
   expect(newPrice.price()).to.equal(10);
   });
 });
+describe('isFirstRun', function(){
+  it("determines if movie is first run", function(){
+  var newTicket = new Ticket("Star Wars","12:00",true, true);
+  expect(isFirstRun(newTicket)).to.equal(true);
+  });
+});

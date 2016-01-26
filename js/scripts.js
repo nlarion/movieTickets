@@ -31,6 +31,17 @@ Ticket.prototype.price = function(){
   return price;
 }
 
+function isFirstRun (ticket) {
+  var firstRunMovies = ["Star Wars", "The Revenant", "The Hateful Eight","Kung Fu Panda 3"];
+  var ret = false;
+  firstRunMovies.forEach(function(movie){
+    if(movie.toString()===ticket.movieName.toString()){
+      ret = true
+    }
+  });
+  return ret;
+}
+
 
 $(document).ready(function() {
   $('#time').timepicker({
