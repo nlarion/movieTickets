@@ -2,7 +2,7 @@
 // var helloWorld = function(){
 //   return false;
 // };
-
+var globals = {liIds:0};
 
 function Ticket(movieName, time, senior, firstRun) {
   this.movieName = movieName;
@@ -42,8 +42,16 @@ function isFirstRun (ticket) {
   return ret;
 }
 
-
 $(document).ready(function() {
+  var movies = ["Star Wars", "The Revenant", "The Hateful Eight","Kung Fu Panda 3"];
+
+  movies.forEach(function(movie){
+    globals.liIds++ // increment the id
+    $(".movie-names").append("<option><span class='contact' id='movie"+globals.liIds+"'>" + movie + "</span></option>");
+  });
+
+
+
   $('#time').timepicker({
     'minTime': '8:00am',
     'maxTime': '12:00am',
@@ -70,15 +78,13 @@ $(document).ready(function() {
       newContact.address.push(newAddress);
       console.log(newAddress);
     });
-    globals.liIds++ // increment the id
-    $("ul#contacts").append("<li><span class='contact' id='hover"+globals.liIds+"'>" + newContact.fullName() + "</span></li>");
 
-    $("#hover"+globals.liIds).hover( function(){
-      console.log("test");
-      $(this).append($("<span> ***</span>"));
-    }, function (){
-      $(this).find("span:last").remove();
-    });
+    // $("#hover"+globals.liIds).hover( function(){
+    //   console.log("test");
+    //   $(this).append($("<span> ***</span>"));
+    // }, function (){
+    //   $(this).find("span:last").remove();
+    // });
 
     clearInput();
 
