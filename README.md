@@ -1,4 +1,5 @@
 # movieTickets
+Movie ticket simulator for week 4 day 2 project at epicodus 
 
 ### License
 
